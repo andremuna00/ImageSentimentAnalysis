@@ -32,91 +32,101 @@ class ImageClassificationBase(nn.Module):
     def epoch_end(self, epoch, result):
         print("Epoch [{}], train_loss: {:.4f}, val_loss: {:.4f}, val_acc: {:.4f}".format(
             epoch, result['train_loss'], result['val_loss'], result['val_acc']))
+    
+    
         
 # Define the model where there is the layers description
 class ImageSentimentClassification(ImageClassificationBase):
-    def __init__(self):
-        super().__init__()
-
-        self.first_conv = nn.Sequential(
-            nn.Conv2d(3, 32, kernel_size=3, padding=1),
-            nn.ReLU()
-        )
-        self.second_conv = nn.Sequential(
-            nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
-            nn.ReLU()
-        )
-        self.next_conv = nn.Sequential(
-            nn.MaxPool2d(2, 2),
-            nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-        )
-        self.network = nn.Sequential(
-            nn.MaxPool2d(2, 2),
-            nn.Flatten(),
-            nn.Linear(175232, 1024),
-            nn.ReLU(),
-            nn.Linear(1024, 512),
-            nn.ReLU(),
-            nn.Linear(512, 3)
-        )
-
-    def forward(self, xb):
-        x = self.first_conv(xb)
-        x = self.second_conv(x)
-        x = self.next_conv(x)
-        return self.network(x)
     # def __init__(self):
     #     super().__init__()
 
     #     self.first_conv = nn.Sequential(
-    #         nn.Conv2d(3, 32, kernel_size = 3, padding = 1),
+    #         nn.Conv2d(3, 32, kernel_size=3, padding=1),
     #         nn.ReLU()
     #     )
     #     self.second_conv = nn.Sequential(
-    #         nn.Conv2d(32,64, kernel_size = 3, stride = 1, padding = 1),
+    #         nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
     #         nn.ReLU()
     #     )
-    #     self.third_conv = nn.Sequential(
-    #         nn.Conv2d(64,64, kernel_size = 3, stride = 1, padding = 1),
-    #         nn.ReLU(),
-            
-    #     )
     #     self.next_conv = nn.Sequential(
-    #         nn.MaxPool2d(2,2),
-    #         nn.Conv2d(64, 128, kernel_size = 3, stride = 1, padding = 1),
+    #         nn.MaxPool2d(2, 2),
+    #         nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
     #         nn.ReLU(),
-    #         nn.Conv2d(128 ,128, kernel_size = 3, stride = 1, padding = 1),
-    #         nn.ReLU(),
-            
-    #     )
-    #     self.last_conv = nn.Sequential(
-    #         nn.MaxPool2d(2,2),
-    #         nn.Conv2d(128, 256, kernel_size = 3, stride = 1, padding = 1),
-    #         nn.ReLU(),
-    #         nn.Conv2d(256,256, kernel_size = 3, stride = 1, padding = 1),
-    #         nn.ReLU(),
-            
     #     )
     #     self.network = nn.Sequential(
-    #         nn.MaxPool2d(2,2),
+    #         nn.MaxPool2d(2, 2),
     #         nn.Flatten(),
-    #         nn.Linear(82944,1024),
+    #         nn.Linear(175232, 1024),
     #         nn.ReLU(),
     #         nn.Linear(1024, 512),
     #         nn.ReLU(),
-    #         nn.Linear(512,3),
+    #         nn.Linear(512, 3)
     #     )
-    
-    # # layers order
+
     # def forward(self, xb):
     #     x = self.first_conv(xb)
     #     x = self.second_conv(x)
-    #     x = self.third_conv(x)
     #     x = self.next_conv(x)
-    #     x = self.last_conv(x)
     #     return self.network(x)
+    def __init__(self):
+        super().__init__()
+
+        self.first_conv = nn.Sequential(
+            nn.Conv2d(3, 32, kernel_size = 3, padding = 1),
+            nn.ReLU()
+        )
+        self.second_conv = nn.Sequential(
+            nn.Conv2d(32,64, kernel_size = 3, stride = 1, padding = 1),
+            nn.ReLU()
+        )
+        self.third_conv = nn.Sequential(
+            nn.Conv2d(64,64, kernel_size = 3, stride = 1, padding = 1),
+            nn.ReLU(),
+            
+        )
+        self.next_conv = nn.Sequential(
+            nn.MaxPool2d(2,2),
+            nn.Conv2d(64, 128, kernel_size = 3, stride = 1, padding = 1),
+            nn.ReLU(),
+            nn.Conv2d(128 ,128, kernel_size = 3, stride = 1, padding = 1),
+            nn.ReLU(),
+            
+        )
+        self.last_conv = nn.Sequential(
+            nn.MaxPool2d(2,2),
+            nn.Conv2d(128, 256, kernel_size = 3, stride = 1, padding = 1),
+            nn.ReLU(),
+            nn.Conv2d(256,256, kernel_size = 3, stride = 1, padding = 1),
+            nn.ReLU(),
+            
+        )
+        self.network = nn.Sequential(
+            nn.MaxPool2d(2,2),
+            nn.Flatten(),
+            nn.Linear(82944,1024),
+            nn.ReLU(),
+            nn.Linear(1024, 512),
+            nn.ReLU(),
+            nn.Linear(512,3),
+        )
     
+    # layers order
+    def forward(self, xb):
+        x = self.first_conv(xb)
+        x = self.second_conv(x)
+        x = self.third_conv(x)
+        x = self.next_conv(x)
+        x = self.last_conv(x)
+        return self.network(x)
+    def extract_features(self, xb):
+        x = self.first_conv(xb)
+        x = self.second_conv(x)
+        x = self.third_conv(x)
+        x = self.next_conv(x)
+        x = self.last_conv(x)
+        return x
+    def classifier(self, xb):
+        return self.network(xb)
 # compute accuracy
 def accuracy(outputs, labels):
     _, preds = torch.max(outputs, dim=1)

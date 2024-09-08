@@ -1,0 +1,2 @@
+Test Accuracy : 0.4848
+Total time taken : 448.23419117132823 minutes

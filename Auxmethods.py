@@ -47,11 +47,14 @@ def visualize_filters(model):
     first_layer /= first_layer.max()
     # Create a grid of images from the weights
     grid = make_grid(first_layer, nrow=8, padding=2)
+    grid = grid.cpu()
     # Display the grid using matplotlib
     print(first_layer.shape)
     plt.figure(figsize=(10,10))
     plt.imshow(grid.permute(1,2,0))
     plt.axis('off')
+    #save
+    plt.savefig('filters.png')
     plt.show()
 
 # Plot the history of accuracies
@@ -61,7 +64,9 @@ def plot_accuracies(history):
     plt.plot(accuracies, '-x')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
-    plt.title('Accuracy vs. No. of epochs');
+    plt.title('Accuracy vs. No. of epochs')
+    #save
+    plt.savefig('accuracy.png')
 
 # Plot the history of losses
 def plot_losses(history):
@@ -73,4 +78,6 @@ def plot_losses(history):
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend(['Training', 'Validation'])
-    plt.title('Loss vs. No. of epochs');
+    plt.title('Loss vs. No. of epochs')
+    #save
+    plt.savefig('loss.png')
