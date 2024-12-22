@@ -1,7 +1,12 @@
 # 📷 Image Sentiment Analysis with CNNs  
 
 ## 🌟 Overview  
-This project leverages a Convolutional Neural Network (CNN) to analyze and predict sentiment from images. By incorporating heat maps, it highlights the most influential regions of an image contributing to the sentiment classification. This provides valuable insights into the interpretability of machine learning models in the context of image and video understanding.  
+This project uses two complementary approaches for image sentiment analysis:
+
+- Convolutional Neural Networks (CNN): Predicts sentiment from images while providing interpretability through heat maps that highlight key regions influencing the predictions.
+- Image Captioning with GPT: Generates captions for images to extract contextual sentiment, leveraging language-based sentiment analysis.
+![image](https://github.com/user-attachments/assets/2315deff-98ee-42c3-acf4-83bfa785c466)
+![image](https://github.com/user-attachments/assets/91f87cf3-16bb-4b04-9909-6bd2d29cb7ef)
 
 ---
 
