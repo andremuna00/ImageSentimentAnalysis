@@ -32,7 +32,6 @@ This project uses two complementary approaches for image sentiment analysis:
 ![OpenCV](https://img.shields.io/badge/OpenCV-%235C2D91.svg?style=for-the-badge&logo=opencv&logoColor=white)
 
 ### **Tools**  
-- **Jupyter Notebooks**: For model development and visualization.  
 - **NumPy & Pandas**: For data manipulation and preprocessing.  
 
 ---
@@ -48,7 +47,7 @@ This project uses two complementary approaches for image sentiment analysis:
 
 3. **Training & Evaluation**  
    - Dataset split into training, validation, and testing sets.  
-   - Metrics include accuracy, precision, recall, and F1 score for performance evaluation.  
+   - Metrics include accuracy, precision.  
 
 4. **Insights & Results**  
    - Heat maps provide actionable insights for image interpretation, especially in sentiment-sensitive applications.  
@@ -74,7 +73,7 @@ This project uses two complementary approaches for image sentiment analysis:
     git clone https://github.com/andremuna00/ImageSentimentAnalysis.git
     ```
 2. Install dependencies
-3. Run the notebook or script to train the model and generate heat maps.
+3. Run the script to train the model and generate heat maps.
 
 ## 📊 Results
 - Accuracy: Achieved 60% on the test dataset.
