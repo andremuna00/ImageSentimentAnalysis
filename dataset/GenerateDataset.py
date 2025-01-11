@@ -6,8 +6,6 @@ import requests
 path = 'D:/UniveSources/MachineLearning-IVU/ImageSentimentAnalysis/dataset/flickr_images'
 dataset_path = 'D:/UniveSources/MachineLearning-IVU/ImageSentimentAnalysis/dataset/flickr3_icassp2016_dataset.csv'
 
-# api_key = "cdb126f4295bf1fa84cc33c7543963e2"
-# secret = "d5a8a6038fbb76b9"
 
 # dataset = pd.read_csv(dataset_path, sep=r'\s*,\s*', header=0, encoding='ascii', engine='python')
 
